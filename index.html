@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CARZON</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #d3d3d3, #f5f5f5);
+    }
+
+    header {
+      background: #000;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { font-size: 1.8rem; font-weight: bold; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover { color: #00d1ff; }
+
+    .search-container {
+      background-color: #eee;
+      padding: 20px 40px;
+      text-align: center;
+    }
+
+    .search-container input[type="search"] {
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      width: 50%;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .search-container input[type="search"]:focus {
+      border-color: #007ba7;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 123, 167, 0.3);
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #fffbe6, #2c3e50, lightgrey, grey, #fffbe6, #000, #2c3e50);
+      background-size: 400% 400%;
+      animation: fadeIn 1s ease;
+      color: white;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .hero h2 { font-size: 3rem; margin-bottom: 10px; }
+    .hero p { font-size: 1.2rem; margin-bottom: 20px; }
+
+    .btn-primary {
+      background: #00c2ff;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      animation: slideIn 1s ease;
+    }
+
+    .btn-primary:hover {
+      background: #007ba7;
+      transform: scale(1.05);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 4px black;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: zoomIn 0.8s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .product-card h3 { font-size: 1.2rem; margin-bottom: 5px; }
+
+    .price {
+      color: #007ba7;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .discount {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: crimson;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .product-card p { font-size: 0.95rem; margin-bottom: 10px; }
+
+    .Buy, .CartBtn {
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      margin: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: slideIn 0.9s ease;
+    }
+
+    .Buy {
+      background-color: #ff5733;
+      color: white;
+    }
+
+    .Buy:hover {
+      background-color:lightblue;
+      transform: scale(1.05);
+    }
+
+    .Buy:active {
+      background-color: yellow;
+      transform: scale(0.95);
+    }
+
+    .CartBtn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    
+
+    .CartBtn:active {
+      background-color: blue;
+      transform: scale(0.95);
+    }
+
+    footer {
+      background: #000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    footer a { color: #00d1ff; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">CARZON</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="search-container">
+    <input type="search" placeholder="Search cars..." />
+  </div>
+
+  <section class="hero">
+    <h2>Fuel your journey & Park your dream here.</h2>
+    <a href="#products" class="btn-primary">Shop Now</a>
+  </section>
+
+  <section id="products" class="product-grid">
+
+    <article class="product-card">
+      <img src="https://imgd.aeplcdn.com/1920x1080/n/cw/ec/149123/nexon-ev-exterior-right-front-three-quarter-79.jpeg?isig=0&q=80" alt="Tata Nexon EV">
+      <div class="discount">12% OFF</div>
+      <h3>Tata Nexon EV</h3>
+      <p class="price">₹14,49,000</p>
+      <p>Electric SUV, 312 km range, premium comfort.</p>
+      <button class="Buy">Buy Now</button>
+      <button class="CartBtn">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <img src="https://royaldrivecar.com/wp-content/uploads/2024/11/harrier-wh.bg_.jpg" alt="Tata Harrier">
+      <div class="discount" style="font-style:oblique;">Best Seller</div>
+      <h3>Tata Harrier</h3>
+      <p class="price">₹15,99,000</p>
+      <p>Powerful diesel, spacious, tech-loaded SUV.</p>
+      <button class="Buy">Buy Now</button>
+      <button class="CartBtn">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/138895/safari-facelift-exterior-right-front-three-quarter-39.jpeg?isig=0&q=80" alt="Tata Safari">
+      <div class="discount">10% OFF</div>
+      <h3>Tata Safari</h3>
+      <p class="price">₹16,99,000</p>
+      <p>7-seater, premium interiors, strong build.</p>
+      <button class="Buy">Buy Now</button>
+      <button class="CartBtn">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <img src="https://imgd.aeplcdn.com/370x208/n/cw/ec/199863/altroz-facelift-exterior-right-front-three-quarter-4.jpeg?isig=0&q=80" alt="Tata Altroz">
+      <h3>Tata Altroz</h3>
+      <p class="price">₹6,99,000</p>
+      <p>Premium hatchback, 5-star safety, stylish design.</p>
+      <button class="Buy">Buy Now</button>
+      <button class="CartBtn">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9WgZ25v7gqnqfDtcEmIqkXxpdnzPpOsRjOw&s" alt="Tata Tiago">
+      <div class="discount">9% OFF</div>
+      <h3>Tata Tiago</h3>
+      <p class="price">₹5,54,000</p>
+      <p>Compact city car, fuel efficient, feature-rich.</p>
+      <button class="Buy">Buy Now</button>
+      <button class="CartBtn">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <img src="https://imgd.aeplcdn.com/370x208/cw/ec/36261/Tata-Tigor-Exterior-137896.jpg?wm=0&q=80" alt="Tata Tigor">
+      <div class="discount">7% OFF</div>
+      <h3>Tata Tigor</h3>
+      <p class="price">₹6,29,000</p>
+      <p>Stylish sedan, boot space, value for money.</p>
+      <button class="Buy">Buy Now</button>
+      <button class="CartBtn">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <img src="https://stimg.cardekho.com/images/car-images/large/Tata/Punch/10681/1739271167873/Orcus-White_dadada.jpg?impolicy=resize&imwidth=420" alt="Tata Punch">
+      <div class="discount">5% OFF</div>
+      <h3>Tata Punch</h3>
+      <p class="price">₹6,00,000</p>
+      <p>Micro-SUV, compact, sporty look, safe drive.</p>
+      <button class="Buy">Buy Now</button>
+      <button class="CartBtn">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <img src="https://www.motorbeam.com/wp-content/uploads/Tata-Nano-White-1200x882.jpg" alt="Tata Nano">
+      <h3>Tata Nano</h3>
+      <p class="price">₹2,99,000</p>
+      <p>Compact sedan, budget-friendly, smooth ride.</p>
+      <button class="Buy">Buy Now</button>
+      <button class="CartBtn">Add to Cart</button>
+    </article>
+
+  </section>
+
+  <footer>
+    <p>Contact: <a href="mailto:mail@gmail.com">mail@gmail.com</a></p>
+    <p>&copy; CARZON 2025. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
